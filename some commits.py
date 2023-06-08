@@ -7,7 +7,7 @@ import logging
 
 from aiogram import Bot, Dispatcher, executor, types
 
-API_TOKEN = '6256551450:AAFuY19eE2Eb5y1-I8KyXfD3yYBQqCF-C70'
+from env import API_TOKEN
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -31,7 +31,7 @@ async def echo(message: types.Message):
     # old style:
     # await bot.send_message(message.chat.id, message.text)
 
-    await message.answer(message.text+ f"halooo {message.from_user['username']}")
+    await message.answer(message.text+ f"\nhalooo\n {message.from_user['username']}")
 
 
 if __name__ == '__main__':
