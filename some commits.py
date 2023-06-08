@@ -1,11 +1,9 @@
-"""
-This is a echo bot.
-It echoes any incoming text messages.
-"""
+
 
 import logging
 
-from aiogram import Bot, Dispatcher, executor, types, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram import Bot, Dispatcher, executor, types
+from aiogram.types import ReplyKeyboardRemove,ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, Message
 
 from env import API_TOKEN
 
@@ -17,21 +15,16 @@ bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
 
-@dp.message_handler(commands=['start', 'help'])
-async def send_welcome(message: types.Message):
-    """
-    This handler will be called when user sends `/start` or `/help` command
-    """
-    await message.reply("Hi!, what do you want?")
-    button_echo = KeyboardButton('I want an echo bot!')
-    button_no = KeyboardButton('Get yo shitty_bot ass outta here!!!')
+kb = InlineKeyboardMarkup(row_width=2)
+inb1 = InlineKeyboardButton(text="you", url="")
+inb2 = InlineKeyboardButton(text="bot", url="")
 
+async def on_startup():
+    print("done!")
 
-
-@dp.message_handler()
-async def echo(message: types.Message):
-
-
+@df.message_handeler(commands=('f'))
+async def f_c(message: types.Message):
+    await message.anwser(text="надейся")
 
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+    executor.start_polling(dp, skip_updates=True, on_startup=())
