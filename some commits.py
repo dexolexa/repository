@@ -5,7 +5,7 @@ It echoes any incoming text messages.
 
 import logging
 
-from aiogram import Bot, Dispatcher, executor, types
+from aiogram import Bot, Dispatcher, executor, types, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
 from env import API_TOKEN
 
@@ -22,16 +22,15 @@ async def send_welcome(message: types.Message):
     """
     This handler will be called when user sends `/start` or `/help` command
     """
-    await message.reply("Hi!\nI'm EchoBot!\nPowered by aiogram.")
+    await message.reply("Hi!, what do you want?")
+    button_echo = KeyboardButton('I want an echo bot!')
+    button_no = KeyboardButton('Get yo shitty_bot ass outta here!!!')
 
 
 
 @dp.message_handler()
 async def echo(message: types.Message):
-    # old style:
-    # await bot.send_message(message.chat.id, message.text)
 
-    await message.answer(message.text+ f"\nhalooo\n {message.from_user['username']}")
 
 
 if __name__ == '__main__':
