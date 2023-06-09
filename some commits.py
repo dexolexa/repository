@@ -7,12 +7,14 @@ from aiogram.types import ReplyKeyboardRemove,ReplyKeyboardMarkup, KeyboardButto
 
 from env import API_TOKEN
 
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
 # Initialize bot and dispatcher
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
+
 
 replies = ReplyKeyboardMarkup(resize_keyboard=True)
 
@@ -21,9 +23,9 @@ replies = ReplyKeyboardMarkup(resize_keyboard=True)
 
 kb = InlineKeyboardMarkup(row_width=2)
 inb1 = InlineKeyboardButton(text="какая-то ссылка на ютуб?", url="https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-inb2 = InlineKeyboardButton(text="телега бота", url="t.me/really_shitty_bot")
-inb3 = KeyboardButton(text="Где я?", request_location=True)
-inb4 = KeyboardButton(text="Какой у меня номер", request_contact=True)
+inb2 = InlineKeyboardButton(text="телега бота",)
+inb3 = KeyboardButton(text="<18")
+inb4 = KeyboardButton(text=">18")
 kb.add(inb2).add(inb1)#.add(inb3).add(inb4)
 
 replies.add(inb4).add(inb3)
@@ -31,9 +33,24 @@ replies.add(inb4).add(inb3)
 async def on_startup():
     print("done!")
 
-@dp.message_handler(commands=('f'))
+@dp.message_handler(commands=['start'])
 async def f_c(message: types.Message):
-    await message.answer(text="надейся", reply_markup=replies)
+    await message.answer(text='Сколько вам лет?', reply_markup=replies)
+    if message.text == '<18' or message.text == '>18':
+
+        if message.text == '<18':
+            await bot.send_message(message.from_user.id, text='розбийник! Уходи!')
+
+
+        elif message.text == '>18':
+            await bot.send_message(message.from_user.id, text='робит')
+    else:
+
+
+
+@dp.message_handler()
+async def talk_extreme():
+
 
 
 
