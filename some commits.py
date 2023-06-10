@@ -1,12 +1,13 @@
-
-
 import logging
 
 from aiogram import Bot, Dispatcher, executor, types
-from aiogram.types import ReplyKeyboardRemove,ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, Message
+from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, \
+    InlineKeyboardButton, Message
+
+from aiogram.dispatcher import FSMContext
+
 
 from env import API_TOKEN
-
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -15,43 +16,39 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
-
 replies = ReplyKeyboardMarkup(resize_keyboard=True)
-
-
-
 
 kb = InlineKeyboardMarkup(row_width=2)
 inb1 = InlineKeyboardButton(text="какая-то ссылка на ютуб?", url="https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-inb2 = InlineKeyboardButton(text="телега бота",)
-inb3 = KeyboardButton(text="<18")
-inb4 = KeyboardButton(text=">18")
-kb.add(inb2).add(inb1)#.add(inb3).add(inb4)
+inb2 = InlineKeyboardButton(text="телега бота", url="t.me/really_shitty_bot")
+inb3 = KeyboardButton(text="геолокация и контакт")
+inb4 = KeyboardButton(text="помощь с выбором")
+kb.add(inb2).add(inb1)  # .add(inb3).add(inb4)
 
 replies.add(inb4).add(inb3)
+
 
 async def on_startup():
     print("done!")
 
-@dp.message_handler(commands=['start'])
-async def f_c(message: types.Message):
-    await message.answer(text='Сколько вам лет?', reply_markup=replies)
-    if message.text == '<18' or message.text == '>18':
+
+@dp.message_handler(commands=['start'], state="*")
+async def f_c(message: types.Message, state: FSMContext):
+    await message.answer(text='Что надо', reply_markup=replies)
+    await state.set_state('ans')
+
+exmp_l = ['>18', '<18']
+@dp.message_handler(state='ans')
+async def msg_r(message: types.Message):
+    if message.text == '' or message.text == '>18':
 
         if message.text == '<18':
             await bot.send_message(message.from_user.id, text='розбийник! Уходи!')
 
-
         elif message.text == '>18':
-            await bot.send_message(message.from_user.id, text='робит')
+            await bot.send_message(message.from_user.id, text='проходите!')
     else:
-
-
-
-@dp.message_handler()
-async def talk_extreme():
-
-
+        None
 
 
 
