@@ -8,7 +8,7 @@ Group=lexa
 
 WorkingDirectory=/home/lexa/repository
 Environment="PYTHONPATH=/home/lexa/repository"
-ExecStart=/home/lexa/repository.venv/bin/python /home/lexa/repository/ubuntu18/some commits.py
+ExecStart=/home/lexa/repository/.venv/bin/python /home/lexa/repository/some_commits.py
 
 [Install]
 WantedBy=multi-user.target
