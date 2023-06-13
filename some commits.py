@@ -83,11 +83,11 @@ gckb = ReplyKeyboardMarkup(resize_keyboard=True).insert(geoloc).insert(contact).
 
 # принятие кнопок
 @dp.callback_query_handler(inb_callback_data.filter(), state='*')
-async def process_callback_button(callback_query: types.CallbackQuery, message: types.Message,  callback_data: dict, state: FSMContext):
+async def process_callback_button(callback_query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     purpose = callback_data['purpose']
     await bot.answer_callback_query(callback_query.id, text=purpose)
     await state.set_state(purpose)
-    # await message.answer(text='выбирай', reply_markup=purpose)
+
 
 # основные функции
 async def on_startup():
