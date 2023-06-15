@@ -32,7 +32,7 @@ macb = InlineKeyboardButton("Macbook", url='https://www.dns-shop.ru/catalog/reci
 vrb = InlineKeyboardButton('Vr helmets', callback_data=inb_callback_data.new('vrkb'))
 '''1st Choice '''
 nb3 = KeyboardButton(text="geolocation and contact")
-nb4 = KeyboardButton(text="Help with choice")
+nb4 = KeyboardButton(text="Help me choose a option.")
 '''geolocations & back buttons'''
 geoloc = KeyboardButton(text="contact", request_contact=True)
 contact = KeyboardButton(text="geolocation(works only on a phone!)", request_location=True)
